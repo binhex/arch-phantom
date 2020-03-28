@@ -1,6 +1,6 @@
 #!/bin/bash
 
-phantom_cli="/opt/phantom/phantom-linux"
+phantom_cli="/opt/phantom/phantom-linux -bind 0.0.0.0 -bind_port 19132"
 
 if [[ -n "${MINECRAFT_SERVER}" ]]; then
 
@@ -10,18 +10,6 @@ else
 
 	echo "[crit] No Minecraft Bedrock server specified via env var 'MINECRAFT_SERVER', exiting..."
 	exit 1
-
-fi
-
-if [[ -n "${LISTEN_IP}" ]]; then
-
-	phantom_cli="${phantom_cli} -bind ${LISTEN_IP}"
-
-fi
-
-if [[ -n "${LISTEN_PORT}" ]]; then
-
-	phantom_cli="${phantom_cli} -bind_port ${LISTEN_PORT}"
 
 fi
 
