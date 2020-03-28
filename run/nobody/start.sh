@@ -1,6 +1,7 @@
 #!/bin/bash
 
-phantom_cli="/opt/phantom/phantom-linux -bind 0.0.0.0 -bind_port 19132"
+# note phantom always listens on port 19132, as well as specific bind_port defined below
+phantom_cli="/opt/phantom/phantom-linux -bind 0.0.0.0 -bind_port 19133"
 
 if [[ -n "${MINECRAFT_SERVER}" ]]; then
 

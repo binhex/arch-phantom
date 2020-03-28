@@ -26,8 +26,11 @@ RUN chmod +x /root/*.sh && \
 # map /config to host defined config path (used to store configuration from app)
 VOLUME /config
 
-# expose port for minecraft
+# expose port for phantom listen port
 EXPOSE 19132
+
+# expose port for phantom listen port
+EXPOSE 19133
 
 # set permissions
 #################

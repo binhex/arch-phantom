@@ -13,7 +13,8 @@ Latest GitHub release of Phantom.
 **Usage**
 ```
 docker run -d \
-    -p 19132:19132 \ 
+    -p 19132:19132 \
+    -p 19133:19133 \
     --name=<container name> \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
@@ -29,7 +30,8 @@ Please replace all user variables in the above command defined by <> with the co
 **Example**
 ```
 docker run -d \
-    -p 19132:19132 \ 
+    -p 19132:19132 \
+    -p 19133:19133 \
     --name=phantom \
     -v /apps/docker/phantom:/config \
     -v /etc/localtime:/etc/localtime:ro \
