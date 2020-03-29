@@ -18,7 +18,8 @@ docker run -d \
     --name=<container name> \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
-    -e MINECRAFT_SERVER=<ip of remote minecraft server:port number>
+    -e REMOTE_MINECRAFT_IP=<ip of remote minecraft server>
+    -e REMOTE_MINECRAFT_PORT=<port of remote minecraft server>
     -e CLEANUP_TIMEOUT=<cleanup timeout in second>
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
@@ -35,7 +36,8 @@ docker run -d \
     --name=phantom \
     -v /apps/docker/phantom:/config \
     -v /etc/localtime:/etc/localtime:ro \
-    -e MINECRAFT_SERVER=1.2.3.4:19132
+    -e REMOTE_MINECRAFT_IP=1.2.3.4
+    -e REMOTE_MINECRAFT_PORT=19132
     -e CLEANUP_TIMEOUT=60
     -e UMASK=000 \
     -e PUID=0 \
