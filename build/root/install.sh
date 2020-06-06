@@ -54,7 +54,7 @@ source aur.sh
 # github releases
 ####
 mkdir -p "/opt/phantom"
-curly.sh -rc 6 -rw 10 -of "/opt/phantom/phantom-linux" -url "https://github.com/jhead/phantom/releases/download/v0.3.1/phantom-linux"
+curly.sh -rc 6 -rw 10 -of "/opt/phantom/phantom-linux" -url "https://github.com/jhead/phantom/releases/download/v0.5.1/phantom-linux"
 
 # install phantom
 cd /opt/phantom && chmod +x ./phantom-linux
@@ -116,6 +116,41 @@ rm /tmp/permissions_heredoc
 
 # env vars
 ####
+
+cat <<'EOF' > /tmp/envvars_heredoc
+
+export REMOTE_MINECRAFT_IP=$(echo "${REMOTE_MINECRAFT_IP}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${REMOTE_MINECRAFT_IP}" ]]; then
+	echo "[info] REMOTE_MINECRAFT_IP defined as '${REMOTE_MINECRAFT_IP}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[crit] REMOTE_MINECRAFT_IP not defined,(via -e REMOTE_MINECRAFT_IP), exiting..." | ts '%Y-%m-%d %H:%M:%.S'
+	exit 1
+fi
+
+export REMOTE_MINECRAFT_PORT=$(echo "${REMOTE_MINECRAFT_PORT}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${REMOTE_MINECRAFT_PORT}" ]]; then
+	echo "[info] REMOTE_MINECRAFT_PORT defined as '${REMOTE_MINECRAFT_PORT}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] REMOTE_MINECRAFT_PORT not defined,(via -e REMOTE_MINECRAFT_PORT), defaulting to '19132'" | ts '%Y-%m-%d %H:%M:%.S'
+	export REMOTE_MINECRAFT_PORT="19132"
+fi
+
+export CLEANUP_TIMEOUT=$(echo "${CLEANUP_TIMEOUT}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${CLEANUP_TIMEOUT}" ]]; then
+	echo "[info] CLEANUP_TIMEOUT defined as '${CLEANUP_TIMEOUT}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] CLEANUP_TIMEOUT not defined,(via -e CLEANUP_TIMEOUT), defaulting to '60' seconds" | ts '%Y-%m-%d %H:%M:%.S'
+	export CLEANUP_TIMEOUT="60"
+fi
+
+EOF
+
+# replace env vars placeholder string with contents of file (here doc)
+sed -i '/# ENVVARS_PLACEHOLDER/{
+    s/# ENVVARS_PLACEHOLDER//g
+    r /tmp/envvars_heredoc
+}' /usr/local/bin/init.sh
+rm /tmp/envvars_heredoc
 
 # cleanup
 cleanup.sh
