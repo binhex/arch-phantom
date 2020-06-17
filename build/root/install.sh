@@ -53,11 +53,9 @@ source aur.sh
 
 # github releases
 ####
-mkdir -p "/opt/phantom"
-curly.sh -rc 6 -rw 10 -of "/opt/phantom/phantom-linux" -url "https://github.com/jhead/phantom/releases/download/v0.5.1/phantom-linux"
 
-# install phantom
-cd /opt/phantom && chmod +x ./phantom-linux
+github.sh --query-type pre-release --install-path "/opt/phantom" --release-type binary --download-assets phantom-linux --github-owner jhead --github-repo phantom
+chmod +x /opt/phantom/phantom-linux
 
 # container perms
 ####
