@@ -54,7 +54,7 @@ source aur.sh
 # github releases
 ####
 
-github.sh --query-type pre-release --install-path "/opt/phantom" --release-type binary --download-assets phantom-linux --github-owner jhead --github-repo phantom
+github.sh --install-path "/opt/phantom" --download-assets phantom-linux --github-owner jhead --github-repo phantom --query-type pre-release
 chmod +x /opt/phantom/phantom-linux
 
 # container perms
