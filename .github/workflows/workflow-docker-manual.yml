@@ -1,4 +1,4 @@
-name: docker-manual-triggered-test
+name: workflow-docker-manual
 
 on:
   workflow_dispatch:
@@ -32,14 +32,6 @@ jobs:
           retry_wait_seconds: 120
           command: |
             export
-      - name: find out runc version
-        uses: nick-invision/retry@v2.4.0
-        with:
-          timeout_minutes: 60
-          max_attempts: 3
-          retry_wait_seconds: 120
-          command: |
-            /usr/bin/runc --version
       - name: Build Docker image and tag
         uses: nick-invision/retry@v2.4.0
         with:
